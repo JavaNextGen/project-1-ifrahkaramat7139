@@ -5,6 +5,7 @@ import static org.junit.Assert.assertThrows;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
 import com.revature.exceptions.NewUserHasNonZeroIdException;
@@ -39,11 +40,11 @@ public class AuthServiceTest {
 	public void setUp() throws Exception {
 		EMPLOYEE_TO_REGISTER = new User(0, "genericEmployee1", "genericPassword", Role.EMPLOYEE);
 		GENERIC_EMPLOYEE_1 = new User(1, "genericEmployee1", "genericPassword", Role.EMPLOYEE);
-		GENERIC_FINANCE_MANAGER_1 = new User(1, "genericManager1", "genericPassword", Role.FINANCE_MANAGER);
+		setGENERIC_FINANCE_MANAGER_1(new User(1, "genericManager1", "genericPassword", Role.FINANCE_MANAGER));
 	}
 
 	@Test
-	public void testRegisterFailsWhenUsernameIsTaken() {
+	public void testRegisterFailsWhenUsernameIsTaken() throws SQLException {
 		when(userService.getByUsername(anyString())).thenReturn(Optional.of(GENERIC_EMPLOYEE_1));
 		
 		assertThrows(UsernameNotUniqueException.class,
@@ -55,7 +56,7 @@ public class AuthServiceTest {
 	}
 
 	@Test
-	public void testRegisterPassesWhenUsernameIsNotTaken() {
+	public void testRegisterPassesWhenUsernameIsNotTaken() throws SQLException {
 		when(userService.getByUsername(anyString())).thenReturn(Optional.empty());
 		when(userDAO.create(anyObject())).thenReturn(GENERIC_EMPLOYEE_1);
 		
@@ -66,7 +67,7 @@ public class AuthServiceTest {
 	}
 
 	@Test
-	public void testRegisterFailsWhenRegistrationIsUnsuccessful() {
+	public void testRegisterFailsWhenRegistrationIsUnsuccessful() throws SQLException {
 		when(userDAO.create(anyObject())).thenThrow(new RegistrationUnsuccessfulException());
 
 		assertThrows(RegistrationUnsuccessfulException.class,
@@ -90,5 +91,13 @@ public class AuthServiceTest {
 		assertEquals(GENERIC_EMPLOYEE_1, authService.login(GENERIC_EMPLOYEE_1.getUsername(), GENERIC_EMPLOYEE_1.getPassword()));
 
 		verify(userService).getByUsername(EMPLOYEE_TO_REGISTER.getUsername());
+	}
+
+	public User getGENERIC_FINANCE_MANAGER_1() {
+		return GENERIC_FINANCE_MANAGER_1;
+	}
+
+	public void setGENERIC_FINANCE_MANAGER_1(User gENERIC_FINANCE_MANAGER_1) {
+		GENERIC_FINANCE_MANAGER_1 = gENERIC_FINANCE_MANAGER_1;
 	}
 }
