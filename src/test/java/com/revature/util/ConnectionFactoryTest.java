@@ -26,3 +26,4 @@ public class ConnectionFactoryTest {
         assertThat(conn, instanceOf(Connection.class));
     }
 }
+

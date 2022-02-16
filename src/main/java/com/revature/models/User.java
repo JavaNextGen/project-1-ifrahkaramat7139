@@ -17,7 +17,27 @@ package com.revature.models;
  */
 
 public class User extends AbstractUser {
-      public String getFirst_name() {
+
+	private String first_name;
+	private String last_name;
+	private String email;
+	public User()
+	{
+		super();
+	}
+	public User(int id, String username, String password, Role role) 
+	{
+		super(id,username, password, role);  
+	}   
+	public User(int id, String username, String password, String fnm,String lnm, String eml,Role role)   
+	{ 
+		super(id,username, password, role);        
+		this.first_name=fnm;         
+		this.last_name=lnm; 
+		this.email=eml;    
+	}
+
+	public String getFirst_name() {
 		return first_name;
 	}
 	public void setFirst_name(String first_name) {
@@ -35,18 +55,11 @@ public class User extends AbstractUser {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	private String first_name;
-      private String last_name;
-      private String email;
-      public User(int id, String username, String password, Role role) 
-      {
-    	  super(id,username, password, role);  
-    	  }   
-      public User(int id, String username, String password, String fnm,String lnm, String eml,Role role)   
-      { super(id,username, password, role);        
-      this.first_name=fnm;         
-      this.last_name=lnm; 
-      this.email=eml;    
-      }
+	@Override
+	public String toString() {
+		return "User [id=" + getId() + ", username=" + getUsername() + ", password=" + getPassword() + ", role=" + getRole() + "first_name=" + first_name + ", last_name=" + last_name + ", email=" + email + "]";
+	}
+	
+	
+
 }
-// just define what is the user 

@@ -1,11 +1,14 @@
 package com.revature.services;
 
+import com.revature.models.AbstractReimbursement;
 import com.revature.models.Reimbursement;
 import com.revature.models.Status;
 import com.revature.models.User;
+import com.revature.repositories.ReimbursementDAO;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The ReimbursementService should handle the submission, processing,
@@ -26,6 +29,8 @@ import java.util.List;
  */
 public class ReimbursementService {
 
+	ReimbursementDAO reimbursementDAO = new ReimbursementDAO();
+	
     /**
      * <ul>
      *     <li>Should ensure that the user is logged in as a Finance Manager</li>
@@ -50,4 +55,28 @@ public class ReimbursementService {
     public List<Reimbursement> getReimbursementsByStatus(Status status) {
         return Collections.emptyList();
     }
+
+	public int saveReimbursement(int eid, Reimbursement reimbursement) {
+		
+		System.out.println("In service");
+		return reimbursementDAO.saveReimbursement(eid, reimbursement);
+	}
+
+	public List<Reimbursement> getAllReimbursementsFromEmpId(int eid) {
+		
+		return reimbursementDAO.getAllReimbursementsFromEmpId(eid);
+	}
+
+	public Reimbursement getReimbursementFromEmpId(int eid, int rid) {
+		
+		return reimbursementDAO.getReimbursementFromEmpId(eid, rid);
+	}
+
+	public int deleteReimbursementFromEmpId(int eid, int rid) {
+		return reimbursementDAO.deleteReimbursementFromEmpId(eid, rid);
+	}
+
+	public int updateReimbursement(int eid, int rid, Reimbursement reimbursement) {
+		return reimbursementDAO.updateReimbursement(eid, rid, reimbursement);
+	}
 }

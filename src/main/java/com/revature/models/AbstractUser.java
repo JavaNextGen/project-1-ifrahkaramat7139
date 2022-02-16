@@ -83,13 +83,11 @@ public class AbstractUser {
         return Objects.hash(id, username, password, role);
     }
 
-    @Override
-    public String toString() {
-        return "AbstractUser{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "AbstractUser [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + "]";
+	}
+
+    
 }
+

@@ -38,12 +38,12 @@ public class ReimbursementServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		GENERIC_EMPLOYEE_1 = new User(1, "genericEmployee1", "genericPassword", Role.EMPLOYEE);
-		GENERIC_FINANCE_MANAGER_1 = new User(1, "genericManager1", "genericPassword", Role.FINANCE_MANAGER);
+		GENERIC_FINANCE_MANAGER_1 = new User(2, "genericManager1", "genericPassword", Role.FINANCE_MANAGER);
 		
-		REIMBURSEMENT_TO_PROCESS = new Reimbursement(2, Status.PENDING, GENERIC_EMPLOYEE_1, null, 150.00);
+		REIMBURSEMENT_TO_PROCESS = new Reimbursement(2, Status.PENDING, 1, null, 150.00);
 		
-		GENERIC_REIMBURSEMENT_1 = new Reimbursement(1, Status.PENDING, GENERIC_EMPLOYEE_1, null, 100.00);
-		GENERIC_REIMBURSEMENT_2 = new Reimbursement(2, Status.APPROVED, GENERIC_EMPLOYEE_1, GENERIC_FINANCE_MANAGER_1, 150.00);
+		GENERIC_REIMBURSEMENT_1 = new Reimbursement(1, Status.PENDING, 1, null, 100.00);
+		GENERIC_REIMBURSEMENT_2 = new Reimbursement(2, Status.APPROVED, 1, 2, 150.00);
 		
 		GENERIC_ALL_PENDING_REIMBURSEMENTS = new ArrayList<Reimbursement>();
 		GENERIC_ALL_PENDING_REIMBURSEMENTS.add(GENERIC_REIMBURSEMENT_1);

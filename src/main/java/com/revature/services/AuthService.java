@@ -1,7 +1,9 @@
 package com.revature.services;
 
 import com.revature.models.User;
+import com.revature.repositories.AuthDAO;
 
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -56,4 +58,12 @@ public class AuthService {
     public Optional<User> exampleRetrieveCurrentUser() {
         return Optional.empty();
     }
+
+	public static boolean authenticateUser(int eId, Map<String, String> headers) {
+		String username = headers.get("username");
+		String password = headers.get("password");
+		
+		return AuthDAO.authenticateUser(eId, username, password);
+		
+	}
 }
